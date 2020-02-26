@@ -1,0 +1,37 @@
+﻿#include "fstream"
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	bool test = 0;
+	int n;
+	n = 1000;
+	int k;
+	ofstream out;
+	//out.open("D:\\Work\\FIT-194\\Lab1\\massiv.txt");		// комп вуза
+	//out.open("C:\\Users\\Makc\\Desktop\\Lab1\\massiv.txt");	// Осн. Комп
+	out.open("C:\\Users\\user\\Desktop\\Lab1\\massiv.txt");	// ноут
+	if (out.is_open())
+	{
+		int i;
+		for (i = 0; i < n; i++)
+		{
+			k = rand();
+			out << k << "\t";
+		}
+		out.close();
+	}
+	else
+	{
+		printf("Файл не создан");
+		test = 1;
+	}
+	if (test == 0)
+	{
+		printf("Массив успешно записан");
+	}
+	else printf("Массив не был записан из-за ошибки программы");
+	return 0;
+}
