@@ -20,7 +20,7 @@ void input_matrix_10(int** a, int n, int m);
 void input_matrix_bin(int** a, int n, int m);
 void input_matrix_ab(int** a, int n, int m, int k, int l);
 
-void lebenspiel(int** a, int** b, int n);
+void lebenspiel(int** a, int** b, int N, int M);
 void output_ls(int** a, int n, int m);
 
 void schützen(int** a, int** b, int n, int m);
@@ -35,7 +35,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	int command = -1;
-	int n, m, N, k;
+	int n, m, N, M, k;
 	int** a;
 	int** b;
 	while ((command < 0) || (command > 5))
@@ -48,24 +48,26 @@ int main()
 		{
 			system("cls");
 			printf("Игра Жизнь\n\n");
-			printf("Введите размерность матрицы кв. матрицы : \n");
+			printf("Введите размерность матрицы : \n");
 			cin >> n;
+			cin >> m;
 			N = n + 2;
+			M = m + 2;
 			a = new int* [N]; // строки
-			creating_matrix(a, N, N);
+			creating_matrix(a, N, M);
 
-			input_matrix_0(a, N, N);
-			input_matrix_bin(a, N, N);
+			input_matrix_0(a, N, M);
+			input_matrix_bin(a, N, M);
 
-			b = new int* [n]; // строки
-			creating_matrix(b, n, n);
-			input_matrix_bin(b, n, n);			
+			b = new int* [N]; // строки
+			creating_matrix(b, N, M);
+			input_matrix_bin(b, N, M);
 
-			output_ls(a, N, N);
-			lebenspiel(a, b, N);
+			output_ls(a, N, M);
+			lebenspiel(a, b, N, M);
 
 			delete_matrix(a, N);
-			delete_matrix(b, n);
+			delete_matrix(b, N);
 		}
 
 		if (command == 2)
@@ -97,7 +99,7 @@ int main()
 					cin >> a[i][j];
 					a1[i][j] = a[i][j];
 				}
-				printf("\nb[%d] = ",i);
+				printf("\nb[%d] = ", i);
 				cin >> b[i];
 			}
 
@@ -160,7 +162,7 @@ int main()
 			{
 				printf("Введите размерность матрицы кв. матрицы (больше 2): \n");
 				cin >> n;
-			}			
+			}
 			a = new int* [n]; // строки
 			int k, l;
 
@@ -353,16 +355,16 @@ void output_ls(int** a, int n, int m) // выводит массив без ра
 	}
 }
 
-void lebenspiel(int** a, int** b,int n)
+void lebenspiel(int** a, int** b, int N, int M)
 {
 	int leben = 0, tod = 0;
 	int g, G;
-	printf("Введите кол-во поколений :\n");
+	printf("\nВведите кол-во поколений :\n");
 	cin >> g;
 	for (G = 1; G <= g; G++)
 	{
-		for (int i = 1; i < n - 1; i++)
-			for (int j = 1; j < n - 1; j++)
+		for (int i = 1; i < N - 1; i++)
+			for (int j = 1; j < M - 1; j++)
 			{
 				if (a[i - 1][j - 1] == 1) leben++;
 				if (a[i - 1][j] == 1) leben++;
@@ -387,13 +389,12 @@ void lebenspiel(int** a, int** b,int n)
 				//printf("\nЗначение текущей клетки : %d\n\n", a[i][j]);
 				leben = 0;
 			}
-		_getch();
-		printf("\nМатрица :\n");
-		output_ls(b, n, n);
+		printf("\nПоколение %d :\n", G);
+		output_ls(b, N, M);
 	}
 }
 
-void schützen(int** a, int**b, int n, int m)
+void schützen(int** a, int** b, int n, int m)
 {
 	int max = max_matrix(a, n, m), count_m = 0, count_s = 0, t, max_sum = 0, sum = 0;
 
@@ -419,7 +420,7 @@ void schützen(int** a, int**b, int n, int m)
 
 	if (count_m == 1)
 		printf("Победил стрелок № %d\n\n", t + 1);
-	
+
 	if (count_m > 1) // если стрелков с макс. баллом больше одного, ищем макс. сумму баллов.. 
 	{
 		for (int i = 0; i < n; i++)
@@ -493,14 +494,14 @@ void ersetzung(int** a, int n) // меняет местами макс. отри
 		for (int j = 0; j < n; j++)
 		{
 			if ((i > j) && (j < n - i - 1)) //зеленая область
-				if ((a[i][j] < 0) && (a[i][j] > min))
+				if ((a[i][j] < 0) && (a[i][j] >= min))
 				{
 					min = a[i][j];
 					minposi = i;
 					minposj = j;
 				}
 			if ((i < j) && (j > n - i - 1)) //красная область
-				if ((a[i][j] >= 0) && (a[i][j] < max))
+				if ((a[i][j] >= 0) && (a[i][j] <= max))
 				{
 					max = a[i][j];
 					maxposi = i;
