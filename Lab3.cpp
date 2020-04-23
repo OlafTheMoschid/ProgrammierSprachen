@@ -88,14 +88,14 @@ int main()
 			text.close();
 
 			printf("\nИзмененый текст : \n");
-
-			for (int i = 0; i < 2; i++)
-				if (strlen(s[i]) > strlen(s[i + 1]))
-				{
-					strcpy(buffer[i], s[i]);
-					strcpy(s[i], s[i + 1]);
-					strcpy(s[i + 1], buffer[i]);
-				}
+			for (int j = 0; j < 3; j++)
+				for (int i = j - 1; i >= 0; i--)
+					if (strlen(s[i]) > strlen(s[i + 1]))
+					{
+						strcpy(buffer[i], s[i]);
+						strcpy(s[i], s[i + 1]);
+						strcpy(s[i + 1], buffer[i]);
+					}
 
 			for (int i = 0; i < 3; i++)
 				cout << s[i] << endl;
