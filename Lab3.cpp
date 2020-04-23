@@ -37,6 +37,7 @@ int main()
 
 			eine_Zeichenfolge_umkehren(s, buffer);
 
+			printf("Реверс строки  : ");
 			cout << buffer << endl;
 		}
 
@@ -48,7 +49,7 @@ int main()
 			char s[255] = { '\0' };
 			char buffer[255] = { '\0' };
 
-			ifstream text("text.txt");
+			ifstream text("C:\\Users\\Makc\\Desktop\\text.txt");
 			if (!text)
 			{
 				printf("Файл не был открыт");
@@ -72,7 +73,7 @@ int main()
 			char s[3][255] = { '\0' };
 			char buffer[3][255] = { '\0' };
 
-			ifstream text("text.txt");
+			ifstream text("C:\\Users\\Makc\\Desktop\\text.txt");
 			if (!text)
 			{
 				printf("Файл не был открыт");
