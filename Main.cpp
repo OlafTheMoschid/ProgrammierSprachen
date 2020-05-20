@@ -28,7 +28,7 @@ int main()
 
 			int n;
 
-			printf("Введите кол-во эл-тов массива : ");
+			printf("Введите кол-во эл-тов массива : \n");
 			cin >> n;
 
 			float* a;
@@ -41,7 +41,7 @@ int main()
 			Output(a, n);
 
 			float x = Durchschnittswert(a, n);
-			printf("Ср знач = %.2f", x);
+			printf("\nСр знач = %.2f", x);
 		}
 
 		if (type == 2)
@@ -122,7 +122,7 @@ int f_funktion(int i) // значение функции F(n) = F(n-1) - G(n-1)
 		return 1;
 	else
 		return f_funktion(i - 1) - g_funktion(i - 1);
-	// возращает разность пердыдущих значений F и G пока не дойдет до F(1) = 1
+	// возращает разность предыдущих значений F и G пока не дойдет до F(1) = 1
 }
 
 int g_funktion(int i) // значение функции G(n) = F(n-1) + G(n-1)
@@ -131,5 +131,5 @@ int g_funktion(int i) // значение функции G(n) = F(n-1) + G(n-1)
 		return 1;
 	else
 		return f_funktion(i - 1) + g_funktion(i - 1);
-	// возращает сумму пердыдущих значений F и G пока не дойдет до G(1) = 1
+	// возращает сумму предыдущих значений F и G пока не дойдет до G(1) = 1
 }
