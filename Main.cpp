@@ -186,7 +186,7 @@ void Sortierung(Busparkplatz* route, int count) // сортировка
 	}
 	for (int i = 0; i < count_60; i++)
 	{
-			printf("Номер %dго автобуса         : %s\n", i + 1, buffer1[i].bus_nummer);
+			printf("Номер автобуса             : %s\n", buffer1[i].bus_nummer);
 			printf("ФИО водителя               : %s\n", buffer1[i].von_nachname);
 			printf("Номер маршрута             : %d\n", buffer1[i].nummer);
 			printf("Продолжительность маршрута : %d\n\n", buffer1[i].кreis_dauer);
