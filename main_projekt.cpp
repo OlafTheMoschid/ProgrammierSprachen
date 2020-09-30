@@ -6,17 +6,12 @@
 
 using namespace std;
 
-struct DATE
+struct DATUM
 {
 	int day;
 	int month;
 	int year;
 	bool leap;
-
-	void DateOut() // Вывод даты
-	{
-		cout << day << "." << month << "." << year << endl;
-	}
 
 	void leapcheck() // Проверка на високосный год
 	{
@@ -113,18 +108,18 @@ struct DATE
 
 struct add
 {
-	DATE* date;
+	DATUM* date;
 	int cnt;
 };
 
-add DateFin();
-void CheckDate(int** arr, int cnt);
+add Datumseingabe();
+void Datumsprüfung(int** arr, int cnt);
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	add arr = DateFin();
-	DATE* date = arr.date;
+	add arr = Datumseingabe();
+	DATUM* date = arr.date;
 
 	int* NDate;
 	int* PDate;
@@ -136,22 +131,14 @@ int main()
 		PDate = date[i].PreDate();
 		NM = date[i].NextMonth();
 		if (NM == true)
-		{
-			cout << "Текущая дата: " << date[i].day << "." << date[i].month << "." << date[i].year << " Следующая дата переходит на следующий месяц: ";
-			cout << NDate[0] << "." << NDate[1] << "." << NDate[2] << " Предыдущая дата: ";
-			cout << PDate[0] << "." << PDate[1] << "." << PDate[2] << endl;
-		}
+			printf("Текущуя дата: %d/%d/%d \t Следующая дата переходит на следующий месяц: %d/%d/%d \t Предыдущая дата: %d/%d/%d \n", date[i].day, date[i].month, date[i].year, NDate[0], NDate[1], NDate[2], PDate[0], PDate[1], PDate[2]);
 		else
-		{
-			cout << "Текущая дата: " << date[i].day << "." << date[i].month << "." << date[i].year << " Следующая дата: ";
-			cout << NDate[0] << "." << NDate[1] << "." << NDate[2] << " Предыдущая дата: ";
-			cout << PDate[0] << "." << PDate[1] << "." << PDate[2] << endl;
-		}
+			printf("Текущуя дата: %d/%d/%d \t Следующая дата: %d/%d/%d \t Предыдущая дата: %d/%d/%d \n", date[i].day, date[i].month, date[i].year, NDate[0], NDate[1], NDate[2], PDate[0], PDate[1], PDate[2]);
 	}
 	return 0;
 }
 
-add DateFin() // ввод даты из файла
+add Datumseingabe() // ввод даты из файла
 {
 	ifstream date("date.txt");
 	char date_inf[255];
@@ -181,13 +168,13 @@ add DateFin() // ввод даты из файла
 
 	date.close();
 
-	CheckDate(inf, cnt);
+	Datumsprüfung(inf, cnt);
 
 	for (int i = 0; i < cnt; i++)
 		if (inf[i][0] != 0) 
 			cnt2++;
 
-	DATE* date_info = new DATE[cnt2];
+	DATUM* date_info = new DATUM[cnt2];
 	i = 0;
 
 	while (i < cnt && c < cnt2)
@@ -209,7 +196,7 @@ add DateFin() // ввод даты из файла
 	return arr;
 }
 
-void CheckDate(int** arr, int cnt) // проверка правильности введенной даты
+void Datumsprüfung(int** arr, int cnt) // проверка правильности введенной даты
 {
 	int months[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	bool leap = false;
